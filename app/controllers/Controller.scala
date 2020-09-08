@@ -1,9 +1,11 @@
 package controllers
 
 import javax.inject._
-
 import play.api.mvc._
 import services.CommandExecutor
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.Future
+
 
 /**
  * This controller demonstrates how to use dependency injection to
@@ -11,6 +13,9 @@ import services.CommandExecutor
  * `Action` that shows an incrementing count to users. The [[CommandExecutor]]
  * object is injected by the Guice dependency injection system.
  */
+
+
+
 @Singleton
 class Controller @Inject()(cc: ControllerComponents,
                            commandExecutor: CommandExecutor) extends AbstractController(cc) {
@@ -21,7 +26,9 @@ class Controller @Inject()(cc: ControllerComponents,
    * `GET /count` requests by an entry in the `routes` config file.
    */
   def execute = Action {
-    commandExecutor.execute()
+    Future {
+      commandExecutor.execute()
+    }
     Ok("executed")
   }
 
