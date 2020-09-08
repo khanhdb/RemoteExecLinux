@@ -27,7 +27,7 @@ class AtomicCommandExecutor extends CommandExecutor {
 
     var line : String = ""
     var nullLineCount = 0
-    while ({line = br.readLine(); nullLineCount < 2}) {
+    while ({line = br.readLine(); nullLineCount < 4}) {
       nullLineCount = if (line == null) nullLineCount + 1 else nullLineCount
       logger.debug(line)
     }
