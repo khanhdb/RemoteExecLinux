@@ -29,7 +29,7 @@ class Controller @Inject()(cc: ControllerComponents,
     Future {
       commandExecutor.execute()
     }
-    Ok("executed")
+    Ok("executing")
   }
 
 }
