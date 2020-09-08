@@ -26,7 +26,9 @@ class AtomicCommandExecutor extends CommandExecutor {
     val br = new BufferedReader(new InputStreamReader(p2.getInputStream()))
 
     var line : String = ""
-    while ({line = br.readLine();  line!= null}) {
+    var nullLineCount = 0
+    while ({line = br.readLine(); nullLineCount < 2}) {
+      nullLineCount = if (line == null) nullLineCount + 1 else nullLineCount
       logger.debug(line)
     }
   }
