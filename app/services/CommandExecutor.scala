@@ -18,24 +18,9 @@ trait CommandExecutor {
  */
 @Singleton
 class AtomicCommandExecutor extends CommandExecutor {
+  import scala.sys.process._
   override def execute(): Unit = {
-    runCommand("/bin/bash", "/home/khanhdb/docker/build-image.sh", "re-build image from latest code...", 4)
-    runCommand("docker-compose", "-f /home/khanhdb/docker/docker-compose.yml up -d", "docker-compose up...", 4)
-  }
-
-  private def runCommand(command : String, param : String, startLog : String, maxEmptyLine: Int): Unit = {
-    import java.io.{BufferedReader, InputStreamReader}
-    logger.debug(startLog)
-    val p = new ProcessBuilder(command, param)
-    val p2 = p.start()
-    val br = new BufferedReader(new InputStreamReader(p2.getInputStream))
-
-    var line : String = ""
-    var nullLineCount = 0
-    while ({line = br.readLine(); nullLineCount < maxEmptyLine}) {
-      nullLineCount = if (line == null) nullLineCount + 1 else nullLineCount
-      logger.debug(line)
-    }
-    logger.debug("done")
+    val output = "/home/khanhdb/docker/build-image.sh" #&& "docker-compose -f /home/khanhdb/docker/docker-compose.yml up -d" !!;
+    logger.debug(output)
   }
 }
