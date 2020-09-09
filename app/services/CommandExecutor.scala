@@ -20,7 +20,7 @@ trait CommandExecutor {
 class AtomicCommandExecutor extends CommandExecutor {
   import scala.sys.process._
   override def execute(): Unit = {
-    val output = "/home/khanhdb/docker/build-image.sh" #&& "docker-compose -f /home/khanhdb/docker/docker-compose.yml up -d" !!;
+    val output = "/home/khanhdb/docker/deploy.sh" !!;
     logger.debug(output)
   }
 }
