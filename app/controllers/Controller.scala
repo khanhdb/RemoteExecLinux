@@ -3,8 +3,6 @@ package controllers
 import javax.inject._
 import play.api.mvc._
 import services.CommandExecutor
-import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.Future
 
 
 /**
@@ -26,10 +24,8 @@ class Controller @Inject()(cc: ControllerComponents,
    * `GET /count` requests by an entry in the `routes` config file.
    */
   def execute = Action {
-    Future {
-      commandExecutor.execute()
-    }
-    Ok("executing")
+    commandExecutor.execute()
+    Ok("executed")
   }
 
 }
