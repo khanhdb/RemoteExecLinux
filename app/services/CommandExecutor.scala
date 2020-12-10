@@ -10,7 +10,7 @@ import play.api.Logger
  */
 trait CommandExecutor {
   protected val logger: Logger = Logger(this.getClass)
-  def execute(): Unit
+  def execute(): String
 }
 
 /**
@@ -19,8 +19,9 @@ trait CommandExecutor {
 @Singleton
 class AtomicCommandExecutor extends CommandExecutor {
   import scala.sys.process._
-  override def execute(): Unit = {
+  override def execute(): String = {
     val output = "/home/khanhdb/docker/deploy.sh" !!;
     logger.debug(output)
+    output
   }
 }
