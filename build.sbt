@@ -1,6 +1,6 @@
 name := "RemoteExecLinux"
 maintainer := "khanhdb"
-version := "2.0"
+version := "2.1"
 
 lazy val `remoteexeclinux` = (project in file(".")).enablePlugins(PlayScala, DebianPlugin)
 
